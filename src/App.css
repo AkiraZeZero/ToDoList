@@ -10,8 +10,11 @@ body {
   background: #333;
   color: hsl(200, 100%, 90%);
   max-width: 400px;
-  padding: 1rem;
+  padding: 1em;
+  border-radius: 1em;
   margin: 0 auto;
+  margin-top: 20px;
+  max-width: 50vw;
 }
 
 .new-item-form {
@@ -34,6 +37,7 @@ body {
   border-radius: 0.25em;
   cursor: pointer;
   outline: none;
+  font-size: 20px;
 }
 
 .btn:hover,
@@ -59,6 +63,7 @@ body {
   border-radius: 0.25em;
   padding: 0.25em 0.5em;
   color: hsl(200, 100%, 90%);
+  font-size: 2em;
 }
 
 .new-item-form input:focus {
@@ -76,6 +81,7 @@ body {
   padding: 0;
   margin-left: 1rem;
   list-style: none;
+  font-size: 2em;
 }
 
 .list li:has(input:checked) label {
@@ -140,4 +146,10 @@ body {
 
 .list li:has(input:checked) label:hover::before {
   background: hsl(200, 100%, 30%);
+}
+
+.testing {
+  background-color: green;
+  border-radius: .5em;
+  padding: 1em;
 }

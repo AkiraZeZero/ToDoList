@@ -1,70 +1,44 @@
 import "./App.css";
 import { useState } from "react";
+import { NewTaskForm } from "./Components/NewTaskForm";
+import { TaskList } from "./Components/TaskList";
 
 function App() {
-  const [newItem, setNewItem] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [task, setTask] = useState([]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    setTodos((currentTodos) => {
+  function addTask(title){
+    setTask((currentTask) => {
       return [
-        ...currentTodos,
-        { id: crypto.randomUUID(), title: newItem, completed: false },
+        ...currentTask,
+        { id: crypto.randomUUID(), title, completed: false },
       ];
     });
-
-    setNewItem("")
   }
 
-  function toggleTodo(id, completed) {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        if(todo.id === id) {
-          return { ...todo, completed}
+  function toggleTask(id, completed) {
+    setTask(currentTask => {
+      return currentTask.map(task => {
+        if(task.id === id) {
+          return { ...task, completed}
         }
 
-        return todo
+        return task
       })
     })
   }
 
-  function deleteTodo(id) {
-    setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
+  function deleteTask(id) {
+    setTask(currentTask => {
+      return currentTask.filter(task => task.id !== id)
     })
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="new-item-form">
-        <div className="form-row">
-          <label htmlFor="item">Add New Item</label>
-          <input
-            value={newItem}
-            onChange={(event) => setNewItem(event.target.value)}
-            type="text"
-            id="item"
-          />
-        </div>
-        <button className="btn">Add</button>
-      </form>
+    <div className="testing">
+      <NewTaskForm onSubmit={addTask}/>
       <h1>To Do List</h1>
-      <ul className="list">
-        {todos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <label>
-                <input type="checkbox" checked={todo.completed} onChange={event => toggleTodo(todo.id, event.target.checked)} />
-                {todo.title}
-              </label>
-              <button onClick={() => deleteTodo(todo.id)} className="btn btn-danger">Delete</button>
-            </li>
-          );
-        })}
-      </ul>
-    </>
+      <TaskList task={task} toggleTask={toggleTask} deleteTask={deleteTask}/>
+    </div>
   );
 }
 
